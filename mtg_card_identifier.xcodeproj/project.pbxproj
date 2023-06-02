@@ -14,6 +14,8 @@
 		717449302A2A2DD6001FB3E4 /* mtg_card_identifierTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7174492F2A2A2DD6001FB3E4 /* mtg_card_identifierTests.swift */; };
 		7174493A2A2A2DD6001FB3E4 /* mtg_card_identifierUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 717449392A2A2DD6001FB3E4 /* mtg_card_identifierUITests.swift */; };
 		7174493C2A2A2DD6001FB3E4 /* mtg_card_identifierUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7174493B2A2A2DD6001FB3E4 /* mtg_card_identifierUITestsLaunchTests.swift */; };
+		717449492A2A3B99001FB3E4 /* Architecture.swift in Sources */ = {isa = PBXBuildFile; fileRef = 717449482A2A3B99001FB3E4 /* Architecture.swift */; };
+		7174494B2A2A3F58001FB3E4 /* DetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7174494A2A2A3F58001FB3E4 /* DetailView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -44,6 +46,8 @@
 		717449352A2A2DD6001FB3E4 /* mtg_card_identifierUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = mtg_card_identifierUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		717449392A2A2DD6001FB3E4 /* mtg_card_identifierUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = mtg_card_identifierUITests.swift; sourceTree = "<group>"; };
 		7174493B2A2A2DD6001FB3E4 /* mtg_card_identifierUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = mtg_card_identifierUITestsLaunchTests.swift; sourceTree = "<group>"; };
+		717449482A2A3B99001FB3E4 /* Architecture.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Architecture.swift; sourceTree = "<group>"; };
+		7174494A2A2A3F58001FB3E4 /* DetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -96,6 +100,8 @@
 			children = (
 				7174491E2A2A2DD5001FB3E4 /* mtg_card_identifierApp.swift */,
 				717449202A2A2DD5001FB3E4 /* ContentView.swift */,
+				7174494A2A2A3F58001FB3E4 /* DetailView.swift */,
+				717449482A2A3B99001FB3E4 /* Architecture.swift */,
 				717449222A2A2DD6001FB3E4 /* Assets.xcassets */,
 				717449242A2A2DD6001FB3E4 /* Preview Content */,
 			);
@@ -258,6 +264,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				717449212A2A2DD5001FB3E4 /* ContentView.swift in Sources */,
+				7174494B2A2A3F58001FB3E4 /* DetailView.swift in Sources */,
+				717449492A2A3B99001FB3E4 /* Architecture.swift in Sources */,
 				7174491F2A2A2DD5001FB3E4 /* mtg_card_identifierApp.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

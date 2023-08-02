@@ -14,6 +14,7 @@
 		717449302A2A2DD6001FB3E4 /* mtg_card_identifierTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7174492F2A2A2DD6001FB3E4 /* mtg_card_identifierTests.swift */; };
 		7174493A2A2A2DD6001FB3E4 /* mtg_card_identifierUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 717449392A2A2DD6001FB3E4 /* mtg_card_identifierUITests.swift */; };
 		7174493C2A2A2DD6001FB3E4 /* mtg_card_identifierUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7174493B2A2A2DD6001FB3E4 /* mtg_card_identifierUITestsLaunchTests.swift */; };
+		71A0E00B2A79F36F007A66BD /* ComposableArchitecture in Frameworks */ = {isa = PBXBuildFile; productRef = 71A0E00A2A79F36F007A66BD /* ComposableArchitecture */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -51,6 +52,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				71A0E00B2A79F36F007A66BD /* ComposableArchitecture in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -143,6 +145,9 @@
 			dependencies = (
 			);
 			name = mtg_card_identifier;
+			packageProductDependencies = (
+				71A0E00A2A79F36F007A66BD /* ComposableArchitecture */,
+			);
 			productName = mtg_card_identifier;
 			productReference = 7174491B2A2A2DD5001FB3E4 /* mtg_card_identifier.app */;
 			productType = "com.apple.product-type.application";
@@ -215,6 +220,9 @@
 				Base,
 			);
 			mainGroup = 717449122A2A2DD5001FB3E4;
+			packageReferences = (
+				71A0E0092A79F36F007A66BD /* XCRemoteSwiftPackageReference "swift-composable-architecture" */,
+			);
 			productRefGroup = 7174491C2A2A2DD5001FB3E4 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -577,6 +585,25 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		71A0E0092A79F36F007A66BD /* XCRemoteSwiftPackageReference "swift-composable-architecture" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/pointfreeco/swift-composable-architecture.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 1.0.0;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		71A0E00A2A79F36F007A66BD /* ComposableArchitecture */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 71A0E0092A79F36F007A66BD /* XCRemoteSwiftPackageReference "swift-composable-architecture" */;
+			productName = ComposableArchitecture;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 717449132A2A2DD5001FB3E4 /* Project object */;
 }

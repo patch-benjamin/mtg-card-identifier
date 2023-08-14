@@ -22,7 +22,7 @@ struct DownloadDatabaseFilesViewReducer: Reducer {
         case binding(BindingAction<State>)
         case downloadButtonTapped
         case downloadFilesCompleted(Bool)
-        case navigateToContentViewButtonTapped
+        case continueButtonTapped
     }
 
     var body: some Reducer<State, Action> {
@@ -41,7 +41,7 @@ struct DownloadDatabaseFilesViewReducer: Reducer {
                     let result = await NetworkController.loadDatabaseFiles()
                     await send(.downloadFilesCompleted(result))
                 }
-            case .navigateToContentViewButtonTapped:
+            case .continueButtonTapped:
                 state.navigateToContentView = true
                 return .none
 
@@ -79,7 +79,9 @@ struct DownloadDatabaseFilesView: View {
                         .cornerRadius(8)
                     Spacer()
                     Button("Continue", action: {
-                        viewStore.send(.navigateToContentViewButtonTapped)
+                        if viewStore.navigateToContentView {
+                            //navigate to ContentView
+                        }
                     })
                     .foregroundColor(.white)
                     .padding()

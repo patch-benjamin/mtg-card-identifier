@@ -9,9 +9,10 @@ import SwiftUI
 
 @main
 struct mtg_card_identifierApp: App {
+//    @StateObject private var appSettings = AppSettings()
     var body: some Scene {
         WindowGroup {
-            DownloadDatabaseFilesView(store: DownloadDatabaseFilesView_Previews.store)
+            RootView()
         }
     }
 }

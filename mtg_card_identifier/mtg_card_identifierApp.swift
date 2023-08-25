@@ -11,7 +11,7 @@ import SwiftUI
 struct mtg_card_identifierApp: App {
     var body: some Scene {
         WindowGroup {
-            ContentView()
+            CardScannerView()
         }
     }
 }

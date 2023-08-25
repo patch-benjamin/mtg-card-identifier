@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		048A7F572A8D652F00B4C4AF /* CardScannerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 048A7F562A8D652F00B4C4AF /* CardScannerView.swift */; };
+		048A7F592A8D67A500B4C4AF /* CardScannerFile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 048A7F582A8D67A500B4C4AF /* CardScannerFile.swift */; };
 		7174491F2A2A2DD5001FB3E4 /* mtg_card_identifierApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7174491E2A2A2DD5001FB3E4 /* mtg_card_identifierApp.swift */; };
 		717449212A2A2DD5001FB3E4 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 717449202A2A2DD5001FB3E4 /* ContentView.swift */; };
 		717449232A2A2DD6001FB3E4 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 717449222A2A2DD6001FB3E4 /* Assets.xcassets */; };
@@ -34,6 +36,9 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		048A7F562A8D652F00B4C4AF /* CardScannerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardScannerView.swift; sourceTree = "<group>"; };
+		048A7F582A8D67A500B4C4AF /* CardScannerFile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardScannerFile.swift; sourceTree = "<group>"; };
+		048A7F5A2A8D781600B4C4AF /* mtg-card-identifier-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = "mtg-card-identifier-Info.plist"; sourceTree = SOURCE_ROOT; };
 		7174491B2A2A2DD5001FB3E4 /* mtg_card_identifier.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = mtg_card_identifier.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		7174491E2A2A2DD5001FB3E4 /* mtg_card_identifierApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = mtg_card_identifierApp.swift; sourceTree = "<group>"; };
 		717449202A2A2DD5001FB3E4 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -94,10 +99,13 @@
 		7174491D2A2A2DD5001FB3E4 /* mtg_card_identifier */ = {
 			isa = PBXGroup;
 			children = (
+				048A7F5A2A8D781600B4C4AF /* mtg-card-identifier-Info.plist */,
 				7174491E2A2A2DD5001FB3E4 /* mtg_card_identifierApp.swift */,
 				717449202A2A2DD5001FB3E4 /* ContentView.swift */,
-				717449222A2A2DD6001FB3E4 /* Assets.xcassets */,
+				048A7F562A8D652F00B4C4AF /* CardScannerView.swift */,
+				048A7F582A8D67A500B4C4AF /* CardScannerFile.swift */,
 				717449242A2A2DD6001FB3E4 /* Preview Content */,
+				717449222A2A2DD6001FB3E4 /* Assets.xcassets */,
 			);
 			path = mtg_card_identifier;
 			sourceTree = "<group>";
@@ -257,7 +265,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				048A7F592A8D67A500B4C4AF /* CardScannerFile.swift in Sources */,
 				717449212A2A2DD5001FB3E4 /* ContentView.swift in Sources */,
+				048A7F572A8D652F00B4C4AF /* CardScannerView.swift in Sources */,
 				7174491F2A2A2DD5001FB3E4 /* mtg_card_identifierApp.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -417,8 +427,10 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"mtg_card_identifier/Preview Content\"";
+				DEVELOPMENT_TEAM = "";
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = "mtg-card-identifier-Info.plist";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -445,8 +457,10 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"mtg_card_identifier/Preview Content\"";
+				DEVELOPMENT_TEAM = "";
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = "mtg-card-identifier-Info.plist";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;

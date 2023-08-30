@@ -9,10 +9,12 @@ import SwiftUI
 import UIKit
 import VisionKit
 
-struct CardScanner: UIViewControllerRepresentable {
+struct LiveTextScanner: UIViewControllerRepresentable {
+
+    
     
     //    @Binding var startScanning: Bool
-    @Binding var scanedCard: [String]
+    @Binding var scanedText: [String]
     
     func makeCoordinator() -> Coordinator {
         Coordinator(self)
@@ -20,14 +22,15 @@ struct CardScanner: UIViewControllerRepresentable {
     
     func makeUIViewController(context: Context) -> DataScannerViewController {
         
+        
         let vc = DataScannerViewController(
             recognizedDataTypes: [.text()],
             qualityLevel: .balanced,
             recognizesMultipleItems: true,
             isHighFrameRateTrackingEnabled: true
             //            isGuidanceEnabled: true,
-//            Don't know if we want that to work but it's basically done
-//            isHighlightingEnabled: true
+            //            Don't know if we want that to work but it's basically done
+            //            isHighlightingEnabled: true
         )
         let partialTransparentView = PartialTransparentView(cutout: CGRect(x: 31, y: 75, width: 350, height: 470))
         partialTransparentView.translatesAutoresizingMaskIntoConstraints = true
@@ -38,39 +41,42 @@ struct CardScanner: UIViewControllerRepresentable {
         vc.regionOfInterest = CGRect(x: 31, y: 75, width: 350, height: 430)
         vc.delegate = context.coordinator
         
-        return vc
-    }
-    
-    func updateUIViewController(_ uiViewController: DataScannerViewController, context: Context) {
         do {
-            try uiViewController.startScanning()
-            //            I don't know how safe this is
+            try vc.startScanning()
+            
         } catch {
             
             print("Error: \(error.localizedDescription)")
         }
+
+        
+        return vc
+    }
+    
+    func updateUIViewController(_ uiViewController: DataScannerViewController, context: Context) {
+//        this function is needed for the "UIViewControllerRepresentable"
     }
     
     @MainActor
     class Coordinator: NSObject, DataScannerViewControllerDelegate {
-        var parent: CardScanner
+        var parent: LiveTextScanner
         
-        init(_ parent: CardScanner) {
+        init(_ parent: LiveTextScanner) {
             self.parent = parent
         }
         
         func dataScanner(_ dataScanner: DataScannerViewController, didAdd addedItems: [RecognizedItem], allItems: [RecognizedItem]) {
-            handleCards(allItems)
+            handleItems(allItems)
         }
         
         func dataScanner(_ dataScanner: DataScannerViewController, didUpdate updatedItems: [RecognizedItem], allItems: [RecognizedItem]) {
-            handleCards(allItems)
+            handleItems(allItems)
         }
         
-        func handleCards(_ cards: [RecognizedItem]) {
-            print("Items count : \(cards.count)")
-            parent.scanedCard = cards.compactMap { $0.text }
-            cards.forEach { item in
+        func handleItems(_ items: [RecognizedItem]) {
+            print("Items count : \(items.count)")
+            parent.scanedText = items.compactMap { $0.text }
+            items.forEach { item in
                 switch item {
                 case .text(let text):
                     print("Scanned words: \(text.transcript)")

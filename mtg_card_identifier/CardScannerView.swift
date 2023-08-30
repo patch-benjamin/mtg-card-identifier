@@ -15,7 +15,7 @@ struct CardScannerView: View {
 //        Some navigation view so it'll pull it up once you do the api call. At least that's what I assume
         NavigationStack {
             VStack {
-                CardScanner(scanedCard: $scanedCard)
+                LiveTextScanner(scanedText: $scanedCard)
                 
             }
             

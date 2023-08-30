@@ -13,15 +13,17 @@ struct LiveTextScanner: UIViewControllerRepresentable {
 
     
     
-    //    @Binding var startScanning: Bool
+    
     @Binding var scanedText: [String]
+// Will probably need more than just a string when we are doing the api call.
     
     func makeCoordinator() -> Coordinator {
-        Coordinator(self)
+        Coordinator(scanedTextBinding: $scanedText)
     }
     
     func makeUIViewController(context: Context) -> DataScannerViewController {
         
+        var cardShape = CGRect(x: 31, y: 75, width: 350, height: 470)
         
         let vc = DataScannerViewController(
             recognizedDataTypes: [.text()],
@@ -32,13 +34,15 @@ struct LiveTextScanner: UIViewControllerRepresentable {
             //            Don't know if we want that to work but it's basically done
             //            isHighlightingEnabled: true
         )
-        let partialTransparentView = PartialTransparentView(cutout: CGRect(x: 31, y: 75, width: 350, height: 470))
+        
+        
+        let partialTransparentView = PartialTransparentView(cutout: cardShape)
         partialTransparentView.translatesAutoresizingMaskIntoConstraints = true
         partialTransparentView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
         partialTransparentView.frame = vc.overlayContainerView.bounds
         
         vc.view.addSubview(partialTransparentView)
-        vc.regionOfInterest = CGRect(x: 31, y: 75, width: 350, height: 430)
+        vc.regionOfInterest = cardShape
         vc.delegate = context.coordinator
         
         do {
@@ -59,11 +63,12 @@ struct LiveTextScanner: UIViewControllerRepresentable {
     
     @MainActor
     class Coordinator: NSObject, DataScannerViewControllerDelegate {
-        var parent: LiveTextScanner
+        var scanedTextBinding: Binding<[String]>
+         
+         init(scanedTextBinding: Binding<[String]>) {
+             self.scanedTextBinding = scanedTextBinding
+         }
         
-        init(_ parent: LiveTextScanner) {
-            self.parent = parent
-        }
         
         func dataScanner(_ dataScanner: DataScannerViewController, didAdd addedItems: [RecognizedItem], allItems: [RecognizedItem]) {
             handleItems(allItems)
@@ -75,7 +80,7 @@ struct LiveTextScanner: UIViewControllerRepresentable {
         
         func handleItems(_ items: [RecognizedItem]) {
             print("Items count : \(items.count)")
-            parent.scanedText = items.compactMap { $0.text }
+            scanedTextBinding.wrappedValue = items.compactMap { $0.text }
             items.forEach { item in
                 switch item {
                 case .text(let text):
@@ -87,7 +92,7 @@ struct LiveTextScanner: UIViewControllerRepresentable {
     }
 }
 
-//This works to make a cutout for the view but am not sure how or why haha.
+
 class PartialTransparentView: UIView {
     var cutout: CGRect?
     
@@ -108,7 +113,7 @@ class PartialTransparentView: UIView {
         guard let cutout = cutout else { return }
         
         
-        let path = UIBezierPath(roundedRect: cutout, cornerRadius: 20)
+        let path = UIBezierPath(roundedRect: cutout, cornerRadius: 10)
         let intersection = rect.intersection(cutout)
         UIRectFill(intersection)
         

@@ -7,6 +7,7 @@
 
 import SwiftUI
 import VisionKit
+
 struct CardScannerView: View {
 //    @State private var startScanning = false
     @State private var scanedCard = [""]

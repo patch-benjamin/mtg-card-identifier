@@ -10,16 +10,32 @@ import UIKit
 import VisionKit
 
 struct LiveTextScanner: UIViewControllerRepresentable {
-
     
     
+    var scanedText: Binding<[String]>
+    var overlay: UIView? = nil
     
-    @Binding var scanedText: [String]
-// Will probably need more than just a string when we are doing the api call.
+    // Will probably need more than just a string when we are doing the api call.
     
     func makeCoordinator() -> Coordinator {
-        Coordinator(scanedTextBinding: $scanedText)
+        Coordinator(scanedTextBinding: scanedText)
     }
+    
+    
+//    enum ScannerOverlay {
+//        case card(cardDemenions: CGSize)
+//        case .none
+//
+//        var view: UIView? {
+//            switch self {
+//            case .card(let cardDemenions):
+//
+//                let partialTransparentView = PartialTransparentView(cutout: cardShape)
+//                partialTransparentView.translatesAutoresizingMaskIntoConstraints = true
+//                partialTransparentView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
+//            }
+//        }
+//    }
     
     func makeUIViewController(context: Context) -> DataScannerViewController {
         
@@ -52,22 +68,22 @@ struct LiveTextScanner: UIViewControllerRepresentable {
             
             print("Error: \(error.localizedDescription)")
         }
-
+        
         
         return vc
     }
     
     func updateUIViewController(_ uiViewController: DataScannerViewController, context: Context) {
-//        this function is needed for the "UIViewControllerRepresentable"
+        //        this function is needed for the "UIViewControllerRepresentable"
     }
     
     @MainActor
     class Coordinator: NSObject, DataScannerViewControllerDelegate {
         var scanedTextBinding: Binding<[String]>
-         
-         init(scanedTextBinding: Binding<[String]>) {
-             self.scanedTextBinding = scanedTextBinding
-         }
+        
+        init(scanedTextBinding: Binding<[String]>) {
+            self.scanedTextBinding = scanedTextBinding
+        }
         
         
         func dataScanner(_ dataScanner: DataScannerViewController, didAdd addedItems: [RecognizedItem], allItems: [RecognizedItem]) {
@@ -134,3 +150,14 @@ extension RecognizedItem {
         }
     }
 }
+
+//extension UIView {
+//    static let cardOverlay: UIView = CGSize()
+//
+//
+//    let partialTransparentView = PartialTransparentView(cutout: cardOverlay)
+//    partialTransparentView.translatesAutoresizingMaskIntoConstraints = true
+//    partialTransparentView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
+//    partialTransparentView.frame = vc.overlayContainerView.bounds
+//
+//}

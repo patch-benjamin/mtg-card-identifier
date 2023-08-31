@@ -7,19 +7,67 @@
 
 import SwiftUI
 import VisionKit
+import AVFoundation
 
 struct CardScannerView: View {
-//    @State private var startScanning = false
+    @State private var cameraAccessAuthorized = false // Assume authorized initially
+
+    var body: some View {
+        NavigationView {
+            if cameraAccessAuthorized {
+                CardScanner()
+            } else {
+                NoCameraAccessView()
+            }
+        }
+        .onAppear {
+            requestCameraAccess()
+            checkCameraAuthorizationStatus()
+        }
+    }
+
+    func requestCameraAccess() {
+        AVCaptureDevice.requestAccess(for: .video) { granted in
+            if granted {
+                print("Camera access granted")
+                cameraAccessAuthorized = true
+            } else {
+                print("Camera access denied")
+                cameraAccessAuthorized = false
+            }
+        }
+    }
+    
+    func checkCameraAuthorizationStatus() {
+            let authorizationStatus = AVCaptureDevice.authorizationStatus(for: .video)
+            
+            switch authorizationStatus {
+            case .authorized:
+                cameraAccessAuthorized = true
+            case .notDetermined, .denied, .restricted:
+                cameraAccessAuthorized = false
+            @unknown default:
+                cameraAccessAuthorized = false
+            }
+        }
+    }
+
+struct CardScannerView_Previews: PreviewProvider {
+    static var previews: some View {
+        CardScannerView()
+    }
+}
+
+
+struct CardScanner: View {
     @State private var scanedCard = [""]
-    //    Do the alert on this but make it so all I need to do is call the single func for the camera to scan the code.
+    
     var body: some View {
 //        Some navigation view so it'll pull it up once you do the api call. At least that's what I assume
         NavigationStack {
             VStack {
                 LiveTextScanner(scanedText: $scanedCard)
-                
             }
-            
             .toolbar {
                 ToolbarItem {
                     Button() {
@@ -30,17 +78,28 @@ struct CardScannerView: View {
                 }
             }
         }
-//        I dont' think this is needed
-//        .task {
-//            if DataScannerViewController.isAvailable && DataScannerViewController.isSupported {
-//
-//            }
-//        }
-        
     }
 }
-struct CardScannerView_Previews: PreviewProvider {
-    static var previews: some View {
-        CardScannerView()
+
+struct NoCameraAccessView: View {
+    var body: some View {
+        VStack {
+            Text("No permissions enabled.                                                  You must enable camera access in order to scan cards")
+                .multilineTextAlignment(.center)
+            
+            Button(action: openAppSettings) {
+                Text("Open Settings")
+            }
+        }
     }
-}
+    
+    func openAppSettings() {
+         if let settingsURL = URL(string: UIApplication.openSettingsURLString), UIApplication.shared.canOpenURL(settingsURL) {
+             
+             UIApplication.shared.open(settingsURL)
+         } else {
+             print("Unable to open app settings")
+         }
+     }
+ }
+

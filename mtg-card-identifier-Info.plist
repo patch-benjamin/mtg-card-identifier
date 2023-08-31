@@ -3,6 +3,6 @@
 <plist version="1.0">
 <dict>
 	<key>NSCameraUsageDescription</key>
-	<string>We need your camera to start scanning MTG Cards! Let&apos;s get started!</string>
+	<string>This app uses the camera to scan your MTG card.</string>
 </dict>
 </plist>

@@ -13,7 +13,7 @@ struct LiveTextScanner: UIViewControllerRepresentable {
     
     // Will need more than just a string when we are doing the api call.
     var scanedText: Binding<[String]>
-    var overlay: UIView? = nil
+    var style: Style
     
     
     
@@ -23,7 +23,8 @@ struct LiveTextScanner: UIViewControllerRepresentable {
     
     func makeUIViewController(context: Context) -> DataScannerViewController {
         
-        var cardShape = CGRect(x: 31, y: 75, width: 350, height: 470)
+//        The x and y needs the math part, going from the window to access the screen which will let you work with the bounds.
+        
         
         let vc = DataScannerViewController(
             recognizedDataTypes: [.text()],
@@ -36,13 +37,13 @@ struct LiveTextScanner: UIViewControllerRepresentable {
         )
         
         
-        let partialTransparentView = PartialTransparentView(cutout: cardShape)
+        let partialTransparentView = PartialTransparentView(cutout: style.overlay)
         partialTransparentView.translatesAutoresizingMaskIntoConstraints = true
         partialTransparentView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
         partialTransparentView.frame = vc.overlayContainerView.bounds
         
         vc.view.addSubview(partialTransparentView)
-        vc.regionOfInterest = cardShape
+        vc.regionOfInterest = style.regionOfInterest
         vc.delegate = context.coordinator
         
         do {
@@ -122,6 +123,29 @@ class PartialTransparentView: UIView {
     }
 }
 
+// MARK: Extension
+//            find the window and make the region of interest, init as well, and then return the style of it.
+struct Style {
+    let overlay: CGRect
+    let regionOfInterest: CGRect
+  
+    static var cardShape: Style {
+        let screenHeight = UIScreen.main.bounds.height
+        let screenWidth = UIScreen.main.bounds.width
+        
+        let centerX = screenWidth / 2
+        let centerY = screenHeight / 3
+        
+        let overlaySize = CGSize(width: screenWidth * 0.8, height: screenHeight * 0.5)
+        let overlayView = CGRect(x: centerX - overlaySize.width / 2, y: centerY - overlaySize.height / 2, width: overlaySize.width, height: overlaySize.height)
+        let region = CGRect(x: centerX - overlaySize.width / 2, y: centerY - overlaySize.height / 2, width: overlaySize.width, height: overlaySize.height)
+        
+       
+        
+        return Style(overlay: overlayView, regionOfInterest: region)
+    }
+    
+}
 
 extension RecognizedItem {
     var text: String? {
@@ -131,15 +155,5 @@ extension RecognizedItem {
         default:
             return nil
         }
-    }
-}
-
-extension UIView {
-    static var cardOverlay: UIView {
-        let cardShape = CGRect(x: 31, y: 75, width: 350, height: 470)
-                let overlayView = PartialTransparentView(cutout: cardShape)
-                overlayView.translatesAutoresizingMaskIntoConstraints = true
-                overlayView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
-                return overlayView
     }
 }

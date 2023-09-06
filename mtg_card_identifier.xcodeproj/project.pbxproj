@@ -76,6 +76,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		048A7F5B2AA223D800B4C4AF /* CardScanner */ = {
+			isa = PBXGroup;
+			children = (
+				048A7F562A8D652F00B4C4AF /* CardScannerView.swift */,
+				048A7F582A8D67A500B4C4AF /* CardScannerFile.swift */,
+			);
+			path = CardScanner;
+			sourceTree = "<group>";
+		};
 		717449122A2A2DD5001FB3E4 = {
 			isa = PBXGroup;
 			children = (
@@ -102,8 +111,7 @@
 				048A7F5A2A8D781600B4C4AF /* mtg-card-identifier-Info.plist */,
 				7174491E2A2A2DD5001FB3E4 /* mtg_card_identifierApp.swift */,
 				717449202A2A2DD5001FB3E4 /* ContentView.swift */,
-				048A7F562A8D652F00B4C4AF /* CardScannerView.swift */,
-				048A7F582A8D67A500B4C4AF /* CardScannerFile.swift */,
+				048A7F5B2AA223D800B4C4AF /* CardScanner */,
 				717449242A2A2DD6001FB3E4 /* Preview Content */,
 				717449222A2A2DD6001FB3E4 /* Assets.xcassets */,
 			);
@@ -427,7 +435,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"mtg_card_identifier/Preview Content\"";
-				DEVELOPMENT_TEAM = "";
+				DEVELOPMENT_TEAM = PN5QQ6G334;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "mtg-card-identifier-Info.plist";
@@ -457,7 +465,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"mtg_card_identifier/Preview Content\"";
-				DEVELOPMENT_TEAM = "";
+				DEVELOPMENT_TEAM = PN5QQ6G334;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "mtg-card-identifier-Info.plist";

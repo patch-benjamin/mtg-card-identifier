@@ -61,11 +61,11 @@ struct CardScannerView_Previews: PreviewProvider {
 
 struct CardScanner: View {
     @State private var scanedCard = [""]
-    
+//    @State private var style: Style? = nil
     var body: some View {
         NavigationStack {
             VStack {
-                LiveTextScanner(scanedText: $scanedCard, overlay: .cardOverlay)
+                LiveTextScanner(scanedText: $scanedCard, style: Style.cardShape)
             }
             .toolbar {
                 ToolbarItem {

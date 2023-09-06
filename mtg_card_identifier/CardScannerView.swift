@@ -10,7 +10,7 @@ import VisionKit
 import AVFoundation
 
 struct CardScannerView: View {
-    @State private var cameraAccessAuthorized = false // Assume authorized initially
+    @State private var cameraAccessAuthorized = false
 
     var body: some View {
         NavigationView {
@@ -63,10 +63,9 @@ struct CardScanner: View {
     @State private var scanedCard = [""]
     
     var body: some View {
-//        Some navigation view so it'll pull it up once you do the api call. At least that's what I assume
         NavigationStack {
             VStack {
-                LiveTextScanner(scanedText: $scanedCard)
+                LiveTextScanner(scanedText: $scanedCard, overlay: .cardOverlay)
             }
             .toolbar {
                 ToolbarItem {

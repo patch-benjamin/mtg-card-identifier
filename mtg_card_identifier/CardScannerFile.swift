@@ -11,31 +11,15 @@ import VisionKit
 
 struct LiveTextScanner: UIViewControllerRepresentable {
     
-    
+    // Will need more than just a string when we are doing the api call.
     var scanedText: Binding<[String]>
     var overlay: UIView? = nil
     
-    // Will probably need more than just a string when we are doing the api call.
+    
     
     func makeCoordinator() -> Coordinator {
         Coordinator(scanedTextBinding: scanedText)
     }
-    
-    
-//    enum ScannerOverlay {
-//        case card(cardDemenions: CGSize)
-//        case .none
-//
-//        var view: UIView? {
-//            switch self {
-//            case .card(let cardDemenions):
-//
-//                let partialTransparentView = PartialTransparentView(cutout: cardShape)
-//                partialTransparentView.translatesAutoresizingMaskIntoConstraints = true
-//                partialTransparentView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
-//            }
-//        }
-//    }
     
     func makeUIViewController(context: Context) -> DataScannerViewController {
         
@@ -74,7 +58,6 @@ struct LiveTextScanner: UIViewControllerRepresentable {
     }
     
     func updateUIViewController(_ uiViewController: DataScannerViewController, context: Context) {
-        //        this function is needed for the "UIViewControllerRepresentable"
     }
     
     @MainActor
@@ -151,13 +134,12 @@ extension RecognizedItem {
     }
 }
 
-//extension UIView {
-//    static let cardOverlay: UIView = CGSize()
-//
-//
-//    let partialTransparentView = PartialTransparentView(cutout: cardOverlay)
-//    partialTransparentView.translatesAutoresizingMaskIntoConstraints = true
-//    partialTransparentView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
-//    partialTransparentView.frame = vc.overlayContainerView.bounds
-//
-//}
+extension UIView {
+    static var cardOverlay: UIView {
+        let cardShape = CGRect(x: 31, y: 75, width: 350, height: 470)
+                let overlayView = PartialTransparentView(cutout: cardShape)
+                overlayView.translatesAutoresizingMaskIntoConstraints = true
+                overlayView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
+                return overlayView
+    }
+}

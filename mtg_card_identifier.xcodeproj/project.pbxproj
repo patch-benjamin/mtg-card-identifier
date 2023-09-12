@@ -11,6 +11,7 @@
 		4A1E84942A7DFA0000A8EAE0 /* ComposableArchitecture in Frameworks */ = {isa = PBXBuildFile; productRef = 4A1E84932A7DFA0000A8EAE0 /* ComposableArchitecture */; };
 		4A1E84982A87051000A8EAE0 /* RootView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A1E84972A87050F00A8EAE0 /* RootView.swift */; };
 		4A1E849D2A8ADD8800A8EAE0 /* SQLite in Frameworks */ = {isa = PBXBuildFile; productRef = 4A1E849C2A8ADD8800A8EAE0 /* SQLite */; };
+		4A393C3E2AB0DC30007F3B18 /* DownloadDatabaseFilesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A393C3D2AB0DC30007F3B18 /* DownloadDatabaseFilesView.swift */; };
 		7174491F2A2A2DD5001FB3E4 /* mtg_card_identifierApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7174491E2A2A2DD5001FB3E4 /* mtg_card_identifierApp.swift */; };
 		717449212A2A2DD5001FB3E4 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 717449202A2A2DD5001FB3E4 /* ContentView.swift */; };
 		717449232A2A2DD6001FB3E4 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 717449222A2A2DD6001FB3E4 /* Assets.xcassets */; };
@@ -40,6 +41,7 @@
 /* Begin PBXFileReference section */
 		4A1E848E2A7DF8CA00A8EAE0 /* SQLiteFileManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SQLiteFileManager.swift; sourceTree = "<group>"; };
 		4A1E84972A87050F00A8EAE0 /* RootView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RootView.swift; sourceTree = "<group>"; };
+		4A393C3D2AB0DC30007F3B18 /* DownloadDatabaseFilesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DownloadDatabaseFilesView.swift; sourceTree = "<group>"; };
 		7174491B2A2A2DD5001FB3E4 /* mtg_card_identifier.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = mtg_card_identifier.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		7174491E2A2A2DD5001FB3E4 /* mtg_card_identifierApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = mtg_card_identifierApp.swift; sourceTree = "<group>"; };
 		717449202A2A2DD5001FB3E4 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -105,6 +107,7 @@
 				7174491E2A2A2DD5001FB3E4 /* mtg_card_identifierApp.swift */,
 				4A1E848E2A7DF8CA00A8EAE0 /* SQLiteFileManager.swift */,
 				4A1E84972A87050F00A8EAE0 /* RootView.swift */,
+				4A393C3D2AB0DC30007F3B18 /* DownloadDatabaseFilesView.swift */,
 				717449202A2A2DD5001FB3E4 /* ContentView.swift */,
 				717449222A2A2DD6001FB3E4 /* Assets.xcassets */,
 				717449242A2A2DD6001FB3E4 /* Preview Content */,
@@ -279,6 +282,7 @@
 				7174491F2A2A2DD5001FB3E4 /* mtg_card_identifierApp.swift in Sources */,
 				4A1E848F2A7DF8CA00A8EAE0 /* SQLiteFileManager.swift in Sources */,
 				4A1E84982A87051000A8EAE0 /* RootView.swift in Sources */,
+				4A393C3E2AB0DC30007F3B18 /* DownloadDatabaseFilesView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

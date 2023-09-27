@@ -11,14 +11,12 @@ import ComposableArchitecture
 struct DownloadDatabaseFilesViewReducer: Reducer {
     struct State: Equatable {
         let downloadButtonTitle = "Download Files"
-        let downloadInformationText = "In order to make this app faster we download a database. This will take a couple minutes depending on your internet connection."
-        var downloadMessage = ""
+        let downloadInformationText = "In order to make this app faster we download a database. This will take a couple of minutes depending on your internet connection."
         var isDownloadingFile: Bool = false
         var downloadSuccessful: Bool?
         var navigateToContentView: Bool = false
         var downloadProgress: Double = 0.0
-        //2
-//        @Dependency var networkController: NetworkController
+        var downloadMessage = ""
     }
 
     enum Action: BindableAction {
@@ -27,6 +25,7 @@ struct DownloadDatabaseFilesViewReducer: Reducer {
         case downloadFilesCompleted(Bool)
         case continueButtonTapped
         case updateDownloadProgress(Double)
+        case isDownloadingFile(Bool)
     }
 
     var body: some Reducer<State, Action> {
@@ -48,6 +47,7 @@ struct DownloadDatabaseFilesViewReducer: Reducer {
                                 send(.updateDownloadProgress(progress))
                             }
                         }
+                        await send(.isDownloadingFile(false))
                         await send(.downloadFilesCompleted(result))
                     }
                 }
@@ -55,9 +55,9 @@ struct DownloadDatabaseFilesViewReducer: Reducer {
                 state.downloadProgress = progress
 
                 if progress < 0.33 {
-                    state.downloadMessage = "Dowload in progress 1/2"
+                    state.downloadMessage = "Download in progress 1/3"
                 } else if progress < 0.66 {
-                    state.downloadMessage = "Download in progress 2/2"
+                    state.downloadMessage = "Download in progress 2/3"
                 } else {
                     state.downloadMessage = "Finishing download..."
                 }
@@ -69,10 +69,12 @@ struct DownloadDatabaseFilesViewReducer: Reducer {
 
             case .binding:
                 return .none
+            case .isDownloadingFile(let isDownloading):
+                state.isDownloadingFile = isDownloading
+                return .none
             }
         }
     }
-
 }
 
 struct DownloadDatabaseFilesView: View {
@@ -87,8 +89,8 @@ struct DownloadDatabaseFilesView: View {
                     Text(viewStore.downloadMessage)
                     Spacer()
                     ProgressView(value: viewStore.downloadProgress)
+                        .scaleEffect(x: 1, y: 2)
                     Spacer()
-
                 } else if let downloadSuccessful = viewStore.downloadSuccessful {
                     Spacer()
                     Spacer()
@@ -118,7 +120,6 @@ struct DownloadDatabaseFilesView: View {
                         ContentView()
                     })
                     Spacer()
-
                 } else {
                     Spacer()
                     Spacer()
@@ -126,6 +127,10 @@ struct DownloadDatabaseFilesView: View {
                     Spacer()
                     Button(viewStore.downloadButtonTitle) {
                         viewStore.send(.downloadButtonTapped)
+                    }
+                    Spacer()
+                    Button("Delete Database") {
+                     _ = SQLiteFileManager.deleteDatabaseFile()
                     }
                     Spacer()
                 }

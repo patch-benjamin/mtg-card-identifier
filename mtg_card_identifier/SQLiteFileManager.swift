@@ -7,23 +7,16 @@
 
 import Foundation
 import SQLite
-//3
-//download sqlite file from server
-//save file to file system
-//load file from file system
-//get file url so we can create a Connection
 
 struct SQLiteFileManager {
+    private static let databaseURLString = "https://mtgjson.com/api/v5/AllPrintings.json"
+    private static let localDatabaseURL = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first!.appendingPathComponent("AllPrintings.sqlite")
+    
     static func loadDatabaseFiles(progressHandler: @escaping (Double) -> Void) async -> Bool {
-        let databaseURLString = "https://mtgjson.com/api/v5/AllPrintings.json"
-
         guard let databaseURL = URL(string: databaseURLString) else {
             print("Invalid database URL")
             return false
         }
-
-        let localURL = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first!.appendingPathComponent("AllPrintings.sqlite")
-
         do {
             let (data, response) = try await URLSession.shared.data(from: databaseURL)
             
@@ -32,18 +25,16 @@ struct SQLiteFileManager {
                 print("Error downloading database: Invalid response")
                 return false
             }
-            
-            try data.write(to: localURL, options: .atomic)
-            print("Database downloaded and saved locally at \(localURL)")
+            try data.write(to: localDatabaseURL, options: .atomic)
+            print("Database downloaded and saved locally at \(localDatabaseURL)")
             return true
         } catch {
             print("Error downloading or saving database file: \(error.localizedDescription)")
             return false
         }
     }
+    
     static func checkDatabaseStatus() -> Bool {
-        let databaseURL = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first!.appendingPathComponent("AllPrintings.sqlite")
-        print(databaseURL)
-        return FileManager.default.fileExists(atPath: databaseURL.path)
+        return FileManager.default.fileExists(atPath: localDatabaseURL.path)
     }
 }

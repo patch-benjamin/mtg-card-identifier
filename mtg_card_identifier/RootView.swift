@@ -10,13 +10,14 @@ import ComposableArchitecture
 
 struct RootViewReducer: Reducer {
     struct State: Equatable {
-        var isDatabaseDownloaded = false
+        var isDatabaseDownloaded = SQLiteFileManager.checkDatabaseStatus()
+        var downloadDatabaseState = DownloadDatabaseFilesViewReducer.State()
     }
     
     enum Action: BindableAction {
         case binding(BindingAction<State>)
         case checkDatabaseDownloaded
-        case databaseDownloaded(Bool)
+        case downloadDatabaseFilesViewAction(DownloadDatabaseFilesViewReducer.Action)
     }
     
     var body: some Reducer<State, Action> {
@@ -27,17 +28,14 @@ struct RootViewReducer: Reducer {
             case .checkDatabaseDownloaded:
                 state.isDatabaseDownloaded = SQLiteFileManager.checkDatabaseStatus()
                 return .none
-            case let .databaseDownloaded(isDownloaded):
-                state.isDatabaseDownloaded = isDownloaded
-                return .none
             case .binding(_):
+                return .none
+            case .downloadDatabaseFilesViewAction(_):
                 return .none
             }
         }
     }
 }
-
-
 struct RootView: View {
     let store: StoreOf<RootViewReducer>
     
@@ -47,15 +45,11 @@ struct RootView: View {
             case true:
                 ContentView()
             case false:
-                DownloadDatabaseFilesView(store: DownloadDatabaseFilesView_Previews.store)
-                    .onAppear {
-                        viewStore.send(.checkDatabaseDownloaded)
-                    }
+                DownloadDatabaseFilesView(store: store.scope(state: \.downloadDatabaseState, action: RootViewReducer.Action.downloadDatabaseFilesViewAction))
             }
         }
     }
 }
-
 struct RootView_Previews: PreviewProvider {
     static let store: StoreOf<RootViewReducer> = .init(initialState: .init(), reducer: {
         RootViewReducer()

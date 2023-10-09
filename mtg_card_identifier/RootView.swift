@@ -16,21 +16,21 @@ struct RootViewReducer: Reducer {
     
     enum Action: BindableAction {
         case binding(BindingAction<State>)
-        case checkDatabaseDownloaded
         case downloadDatabaseFilesViewAction(DownloadDatabaseFilesViewReducer.Action)
     }
     
     var body: some Reducer<State, Action> {
         BindingReducer()
         
+        Scope(state: \.downloadDatabaseState, action: /Action.downloadDatabaseFilesViewAction) {
+          DownloadDatabaseFilesViewReducer()
+        }
+        
         Reduce { state, action in
             switch action {
-            case .checkDatabaseDownloaded:
-                state.isDatabaseDownloaded = SQLiteFileManager.checkDatabaseStatus()
+            case .binding:
                 return .none
-            case .binding(_):
-                return .none
-            case .downloadDatabaseFilesViewAction(_):
+            case .downloadDatabaseFilesViewAction:
                 return .none
             }
         }

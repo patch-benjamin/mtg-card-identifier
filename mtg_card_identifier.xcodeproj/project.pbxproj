@@ -7,13 +7,15 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		0435C0592AB4A5F30048CC9E /* LiveTextScannerViewHelpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0435C0582AB4A5F30048CC9E /* LiveTextScannerViewHelpers.swift */; };
+		0435C05C2AB4A9860048CC9E /* CGRectLogic.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0435C05B2AB4A9860048CC9E /* CGRectLogic.swift */; };
 		048A7F572A8D652F00B4C4AF /* CardScannerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 048A7F562A8D652F00B4C4AF /* CardScannerView.swift */; };
-		048A7F592A8D67A500B4C4AF /* CardScannerFile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 048A7F582A8D67A500B4C4AF /* CardScannerFile.swift */; };
+		048A7F592A8D67A500B4C4AF /* LiveTextScannerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 048A7F582A8D67A500B4C4AF /* LiveTextScannerView.swift */; };
 		7174491F2A2A2DD5001FB3E4 /* mtg_card_identifierApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7174491E2A2A2DD5001FB3E4 /* mtg_card_identifierApp.swift */; };
 		717449212A2A2DD5001FB3E4 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 717449202A2A2DD5001FB3E4 /* ContentView.swift */; };
 		717449232A2A2DD6001FB3E4 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 717449222A2A2DD6001FB3E4 /* Assets.xcassets */; };
 		717449262A2A2DD6001FB3E4 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 717449252A2A2DD6001FB3E4 /* Preview Assets.xcassets */; };
-		717449302A2A2DD6001FB3E4 /* mtg_card_identifierTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7174492F2A2A2DD6001FB3E4 /* mtg_card_identifierTests.swift */; };
+		717449302A2A2DD6001FB3E4 /* aspectRatioTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7174492F2A2A2DD6001FB3E4 /* aspectRatioTests.swift */; };
 		7174493A2A2A2DD6001FB3E4 /* mtg_card_identifierUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 717449392A2A2DD6001FB3E4 /* mtg_card_identifierUITests.swift */; };
 		7174493C2A2A2DD6001FB3E4 /* mtg_card_identifierUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7174493B2A2A2DD6001FB3E4 /* mtg_card_identifierUITestsLaunchTests.swift */; };
 /* End PBXBuildFile section */
@@ -36,8 +38,10 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		0435C0582AB4A5F30048CC9E /* LiveTextScannerViewHelpers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LiveTextScannerViewHelpers.swift; sourceTree = "<group>"; };
+		0435C05B2AB4A9860048CC9E /* CGRectLogic.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CGRectLogic.swift; sourceTree = "<group>"; };
 		048A7F562A8D652F00B4C4AF /* CardScannerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardScannerView.swift; sourceTree = "<group>"; };
-		048A7F582A8D67A500B4C4AF /* CardScannerFile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardScannerFile.swift; sourceTree = "<group>"; };
+		048A7F582A8D67A500B4C4AF /* LiveTextScannerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LiveTextScannerView.swift; sourceTree = "<group>"; };
 		048A7F5A2A8D781600B4C4AF /* mtg-card-identifier-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = "mtg-card-identifier-Info.plist"; sourceTree = SOURCE_ROOT; };
 		7174491B2A2A2DD5001FB3E4 /* mtg_card_identifier.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = mtg_card_identifier.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		7174491E2A2A2DD5001FB3E4 /* mtg_card_identifierApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = mtg_card_identifierApp.swift; sourceTree = "<group>"; };
@@ -45,7 +49,7 @@
 		717449222A2A2DD6001FB3E4 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		717449252A2A2DD6001FB3E4 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		7174492B2A2A2DD6001FB3E4 /* mtg_card_identifierTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = mtg_card_identifierTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		7174492F2A2A2DD6001FB3E4 /* mtg_card_identifierTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = mtg_card_identifierTests.swift; sourceTree = "<group>"; };
+		7174492F2A2A2DD6001FB3E4 /* aspectRatioTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = aspectRatioTests.swift; sourceTree = "<group>"; };
 		717449352A2A2DD6001FB3E4 /* mtg_card_identifierUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = mtg_card_identifierUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		717449392A2A2DD6001FB3E4 /* mtg_card_identifierUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = mtg_card_identifierUITests.swift; sourceTree = "<group>"; };
 		7174493B2A2A2DD6001FB3E4 /* mtg_card_identifierUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = mtg_card_identifierUITestsLaunchTests.swift; sourceTree = "<group>"; };
@@ -76,11 +80,21 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		0435C05A2AB4A96A0048CC9E /* LiveTextScanning */ = {
+			isa = PBXGroup;
+			children = (
+				048A7F582A8D67A500B4C4AF /* LiveTextScannerView.swift */,
+				0435C0582AB4A5F30048CC9E /* LiveTextScannerViewHelpers.swift */,
+				0435C05B2AB4A9860048CC9E /* CGRectLogic.swift */,
+			);
+			path = LiveTextScanning;
+			sourceTree = "<group>";
+		};
 		048A7F5B2AA223D800B4C4AF /* CardScanner */ = {
 			isa = PBXGroup;
 			children = (
 				048A7F562A8D652F00B4C4AF /* CardScannerView.swift */,
-				048A7F582A8D67A500B4C4AF /* CardScannerFile.swift */,
+				0435C05A2AB4A96A0048CC9E /* LiveTextScanning */,
 			);
 			path = CardScanner;
 			sourceTree = "<group>";
@@ -129,7 +143,7 @@
 		7174492E2A2A2DD6001FB3E4 /* mtg_card_identifierTests */ = {
 			isa = PBXGroup;
 			children = (
-				7174492F2A2A2DD6001FB3E4 /* mtg_card_identifierTests.swift */,
+				7174492F2A2A2DD6001FB3E4 /* aspectRatioTests.swift */,
 			);
 			path = mtg_card_identifierTests;
 			sourceTree = "<group>";
@@ -273,9 +287,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				048A7F592A8D67A500B4C4AF /* CardScannerFile.swift in Sources */,
+				048A7F592A8D67A500B4C4AF /* LiveTextScannerView.swift in Sources */,
 				717449212A2A2DD5001FB3E4 /* ContentView.swift in Sources */,
+				0435C0592AB4A5F30048CC9E /* LiveTextScannerViewHelpers.swift in Sources */,
 				048A7F572A8D652F00B4C4AF /* CardScannerView.swift in Sources */,
+				0435C05C2AB4A9860048CC9E /* CGRectLogic.swift in Sources */,
 				7174491F2A2A2DD5001FB3E4 /* mtg_card_identifierApp.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -284,7 +300,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				717449302A2A2DD6001FB3E4 /* mtg_card_identifierTests.swift in Sources */,
+				717449302A2A2DD6001FB3E4 /* aspectRatioTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -439,11 +455,12 @@
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "mtg-card-identifier-Info.plist";
+				INFOPLIST_KEY_NSCameraUsageDescription = "This app uses the camera to scan your MTG card.";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = UIInterfaceOrientationPortrait;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -469,11 +486,12 @@
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "mtg-card-identifier-Info.plist";
+				INFOPLIST_KEY_NSCameraUsageDescription = "This app uses the camera to scan your MTG card.";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = UIInterfaceOrientationPortrait;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",

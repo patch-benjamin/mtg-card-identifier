@@ -6,52 +6,17 @@
 //
 
 import SwiftUI
-import VisionKit
-import AVFoundation
-
+//VisionKit only in live text scanner.
 struct CardScannerView: View {
-    @State private var cameraAccessAuthorized = false
-
+    @State var scannedText: [String] = []
     var body: some View {
-        NavigationView {
-            if cameraAccessAuthorized {
-                CardScanner()
-            } else {
-                NoCameraAccessView()
-            }
-        }
-        .onAppear {
-            requestCameraAccess()
-            checkCameraAuthorizationStatus()
-        }
+        EmptyView()
+//        NavigationView {
+//            LiveTextScannerView(scannedText: <#Binding<[String]>#>, overlay: <#(View)?#>, regionOfInterest: <#CGRect?#>)
+//            //
+//        } LiveTextScanningViewWrapper
     }
-
-    func requestCameraAccess() {
-        AVCaptureDevice.requestAccess(for: .video) { granted in
-            if granted {
-                print("Camera access granted")
-                cameraAccessAuthorized = true
-            } else {
-                print("Camera access denied")
-                cameraAccessAuthorized = false
-            }
-        }
-    }
-    
-    func checkCameraAuthorizationStatus() {
-            let authorizationStatus = AVCaptureDevice.authorizationStatus(for: .video)
-            
-            switch authorizationStatus {
-            case .authorized:
-                cameraAccessAuthorized = true
-            case .notDetermined, .denied, .restricted:
-                cameraAccessAuthorized = false
-            @unknown default:
-                cameraAccessAuthorized = false
-            }
-        }
-    }
-
+}
 struct CardScannerView_Previews: PreviewProvider {
     static var previews: some View {
         CardScannerView()
@@ -59,46 +24,7 @@ struct CardScannerView_Previews: PreviewProvider {
 }
 
 
-struct CardScanner: View {
-    @State private var scanedCard = [""]
-//    @State private var style: Style? = nil
-    var body: some View {
-        NavigationStack {
-            VStack {
-                LiveTextScanner(scanedText: $scanedCard, style: Style.cardShape)
-            }
-            .toolbar {
-                ToolbarItem {
-                    Button() {
-                        
-                    } label: {
-                        Image(systemName: "magnifyingglass")
-                    }
-                }
-            }
-        }
-    }
-}
 
-struct NoCameraAccessView: View {
-    var body: some View {
-        VStack {
-            Text("No permissions enabled.                                                  You must enable camera access in order to scan cards")
-                .multilineTextAlignment(.center)
-            
-            Button(action: openAppSettings) {
-                Text("Open Settings")
-            }
-        }
-    }
-    
-    func openAppSettings() {
-         if let settingsURL = URL(string: UIApplication.openSettingsURLString), UIApplication.shared.canOpenURL(settingsURL) {
-             
-             UIApplication.shared.open(settingsURL)
-         } else {
-             print("Unable to open app settings")
-         }
-     }
- }
+
+
 

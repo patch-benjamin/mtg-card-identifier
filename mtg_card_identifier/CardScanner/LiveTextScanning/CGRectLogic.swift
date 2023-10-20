@@ -11,33 +11,34 @@ import SwiftUI
 
 extension CGRect {
     func largestCenteredRect(with aspectRatio: Double, padding: CGFloat) -> CGRect {
-//  is it wider or taller rectangle or sqaure.
-//        if rect is wide tall or sqaure if you want to go super far.
-//        less than 1(aspectRatio so its 1 wide and 1 tall would be sqaure. more than 1 = 1 for sizing of the phone
-        let magicCardAspectRatio = 0.714
-        let width = Int(self.height * aspectRatio)
-        let height = Int(self.width * aspectRatio)
-//    compare the aspectratio passed in agaist self for rect
-        if self.height > self.width {
-//            its protrait
-           return CGRect(x: (Int(self.width) - width) / 2, y: 0, width: width, height: Int(self.height))
-        } else if self.width > self.height {
-//            its landscape
-            CGRect(x: (Int(self.height) - height) / 2, y: 0, width: width, height: Int(self.height))
-        } else   {
-//            its sqaure
-            ("howd you do this?")
+        guard aspectRatio > 0 else {
+            return CGRect.zero
         }
         
-
-//        Use TDD
-//        width / height
-//        magic cards AspectRatio 2.5 / 3.5 = .714
+        let height = Int(self.height * aspectRatio)
+        let width = Int(self.width * aspectRatio)
+        //    compare the aspectratio passed in agaist self for rect
         
-       
+        if self.height > self.width {
+            //            its protrait
+            return CGRect(x: (Int(self.width) - width) / 2, y: 0, width: width, height: height)
+        } else if self.width > self.height {
+            //            its landscape
+            return CGRect(x: (Int(self.width) - width) / 2, y: 0, width: width, height: height)
+        } else   {
+            //            its sqaure
+            return CGRect(x: (Int(self.width) - width) / 2, y: 0, width: width, height: height)
+        }
+        
+        
+        //        Use TDD
+        //        width / height
+        //        magic cards AspectRatio 2.5 / 3.5 = .714
+        
+        
         
         // TODO: create Unit tests for this function that test it on different sizes/orientations.
-        return CGRect(x: (Int(self.width) - width) / 2, y: 0, width: width, height: Int(self.height))
+        //        return CGRect(x: (Int(self.width) - width) / 2, y: 0, width: width, height: Int(self.height))
     }
 }
 

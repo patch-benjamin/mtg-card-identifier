@@ -105,8 +105,8 @@
 			isa = PBXGroup;
 			children = (
 				7174491E2A2A2DD5001FB3E4 /* mtg_card_identifierApp.swift */,
-				4A1E848E2A7DF8CA00A8EAE0 /* SQLiteFileManager.swift */,
 				4A1E84972A87050F00A8EAE0 /* RootView.swift */,
+				4A1E848E2A7DF8CA00A8EAE0 /* SQLiteFileManager.swift */,
 				4A393C3F2AB0DE6F007F3B18 /* DownloadDatabaseFilesView.swift */,
 				717449202A2A2DD5001FB3E4 /* ContentView.swift */,
 				717449222A2A2DD6001FB3E4 /* Assets.xcassets */,

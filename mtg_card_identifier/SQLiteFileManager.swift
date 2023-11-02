@@ -12,24 +12,34 @@ struct SQLiteFileManager {
     private static let databaseURLString = "https://mtgjson.com/api/v5/AllPrintings.json"
     private static let localDatabaseURL = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first!.appendingPathComponent("AllPrintings.sqlite")
     
-    static func loadDatabaseFiles(progressHandler: @escaping (Double) -> Void) async -> Bool {
+    static func loadDatabaseFiles(progressHandler: @escaping (Double) -> Void, completion: @escaping (Bool) -> Void) -> Bool {
         guard let databaseURL = URL(string: databaseURLString) else {
             print("Invalid database URL")
             return false
         }
-        do {
-            let (data, response) = try await URLSession.shared.data(from: databaseURL)
-            
-            guard let httpResponse = response as? HTTPURLResponse,
-                  (200...299).contains(httpResponse.statusCode) else {
-                print("Error downloading database: Invalid response")
-                return false
+        return URLSessionDownloader.start(sessionIdentifier: "SQLiteFileManager", url: databaseURL, progressRecieved: { progress in
+            progressHandler(progress)
+        }) { temporaryURL in
+            do {
+                try FileManager.default.moveItem(at: temporaryURL!, to: localDatabaseURL)
+                print("Database downloaded and saved locally at \(localDatabaseURL)")
+                completion(true)
+            } catch {
+                print("Error moving downloaded file: \(error.localizedDescription)")
+                completion(false)
             }
-            try data.write(to: localDatabaseURL, options: .atomic)
-            print("Database downloaded and saved locally at \(localDatabaseURL)")
+        }
+    }
+    
+    static func deleteDatabaseFile() -> Bool {
+        let databaseURL = localDatabaseURL
+        
+        do {
+            try FileManager.default.removeItem(at: databaseURL)
+            print("Database file deleted successfully")
             return true
         } catch {
-            print("Error downloading or saving database file: \(error.localizedDescription)")
+            print("Error deleting database file: \(error.localizedDescription)")
             return false
         }
     }

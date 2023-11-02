@@ -11,7 +11,8 @@ import SwiftUI
 struct mtg_card_identifierApp: App {
     var body: some Scene {
         WindowGroup {
-            RootView(store: RootView_Previews.store)
+//            RootView(store: RootView_Previews.store)
+            DownloadDatabaseFilesView(store: DownloadDatabaseFilesView_Previews.store)
         }
     }
 }

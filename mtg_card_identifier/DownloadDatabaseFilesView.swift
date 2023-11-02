@@ -8,6 +8,57 @@
 import SwiftUI
 import ComposableArchitecture
 
+
+class URLSessionDownloader: NSObject, URLSessionDownloadDelegate {
+    static var current: URLSessionDownloader?
+    let sessionIdentifier: String
+    var task: URLSessionDownloadTask?
+    private(set) lazy var session: URLSession = {
+        URLSession(configuration: .background(withIdentifier: sessionIdentifier), delegate: self, delegateQueue: OperationQueue())
+    }()
+    let progressRecieved: (Double) -> Void
+    let didFinishDownloading: (URL?) -> Void
+    
+    private init(sessionIdentifier: String, url: URL, progressRecieved: @escaping (Double) -> Void, didFinishDownloading: @escaping (URL?) -> Void) {
+        
+        self.progressRecieved = progressRecieved
+        self.sessionIdentifier = sessionIdentifier
+        self.didFinishDownloading = didFinishDownloading
+        super.init()
+        self.task = session.downloadTask(with: url)
+        task?.resume()
+    }
+    
+    static func start(sessionIdentifier: String, url: URL, progressRecieved: @escaping (Double) -> Void, didFinishDownloading: @escaping (URL?) -> Void) -> Bool {
+        guard self.current == nil else { return false }
+        self.current = .init(sessionIdentifier: sessionIdentifier, url: url, progressRecieved: progressRecieved, didFinishDownloading: didFinishDownloading)
+
+        let request = URLRequest(url: url)
+        self.current?.task = URLSession.shared.downloadTask(with: request)
+        self.current?.task?.resume()
+
+        return true
+    }
+    
+    func urlSession(_ session: URLSession, downloadTask: URLSessionDownloadTask, didWriteData bytesWritten: Int64, totalBytesWritten: Int64, totalBytesExpectedToWrite: Int64) {
+        progressRecieved(Double(totalBytesWritten) / Double(totalBytesExpectedToWrite))
+    }
+    
+    func urlSession(_ session: URLSession, downloadTask: URLSessionDownloadTask, didFinishDownloadingTo location: URL) {
+        didFinishDownloading(location)
+        Self.current = nil
+    }
+    func urlSession(_ session: URLSession, task: URLSessionTask, didCompleteWithError error: Error?) {
+        if let error = error {
+            print("Download failed with error: \(error.localizedDescription)")
+            didFinishDownloading(nil)
+        } else {
+            print("Download completed successfully.")
+        }
+        Self.current = nil
+    }
+}
+
 struct DownloadDatabaseFilesViewReducer: Reducer {
     struct State: Equatable {
         let downloadButtonTitle = "Download Files"
@@ -42,22 +93,26 @@ struct DownloadDatabaseFilesViewReducer: Reducer {
                 state.isDownloadingFile = true
                 return .run { send in
                     Task.init {
-                        let result = await SQLiteFileManager.loadDatabaseFiles { progress in
+                         SQLiteFileManager.loadDatabaseFiles { progress in
                             DispatchQueue.main.async {
                                 send(.updateDownloadProgress(progress))
+                                print(progress)
+                            }
+                        } completion: { success in
+                            DispatchQueue.main.async {
+                                send(.isDownloadingFile(false))
+                                send(.downloadFilesCompleted(success))
                             }
                         }
-                        await send(.isDownloadingFile(false))
-                        await send(.downloadFilesCompleted(result))
                     }
                 }
             case .updateDownloadProgress(let progress):
                 state.downloadProgress = progress
 
                 if progress < 0.33 {
-                    state.downloadMessage = "Download in progress 1/3"
+                    state.downloadMessage = "Download in progress 1/2"
                 } else if progress < 0.66 {
-                    state.downloadMessage = "Download in progress 2/3"
+                    state.downloadMessage = "Download in progress 2/2"
                 } else {
                     state.downloadMessage = "Finishing download..."
                 }
@@ -88,7 +143,7 @@ struct DownloadDatabaseFilesView: View {
                     Spacer()
                     Text(viewStore.downloadMessage)
                     Spacer()
-                    ProgressView(value: viewStore.downloadProgress)
+                    ProgressView(value: min(max(viewStore.downloadProgress, 0), 1))
                         .scaleEffect(x: 1, y: 2)
                     Spacer()
                 } else if let downloadSuccessful = viewStore.downloadSuccessful {

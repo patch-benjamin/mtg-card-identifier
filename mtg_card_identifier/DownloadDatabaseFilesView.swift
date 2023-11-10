@@ -41,7 +41,11 @@ class URLSessionDownloader: NSObject, URLSessionDownloadDelegate {
     }
     
     func urlSession(_ session: URLSession, downloadTask: URLSessionDownloadTask, didWriteData bytesWritten: Int64, totalBytesWritten: Int64, totalBytesExpectedToWrite: Int64) {
-        progressRecieved(Double(totalBytesWritten) / Double(totalBytesExpectedToWrite))
+        let scaledDownFactor: Double = 100000000
+        let absoluteTotalBytesExpected = max(1.0, abs(Double(totalBytesExpectedToWrite) / scaledDownFactor))
+        let absoluteTotalBytesWritten = max(0.0, abs(Double(totalBytesWritten) / scaledDownFactor))
+        let progress = min(1.0, absoluteTotalBytesWritten / absoluteTotalBytesExpected)
+        progressRecieved(progress)
     }
     
     func urlSession(_ session: URLSession, downloadTask: URLSessionDownloadTask, didFinishDownloadingTo location: URL) {
@@ -87,6 +91,7 @@ struct DownloadDatabaseFilesViewReducer: Reducer {
             case .downloadFilesCompleted(let success):
                 state.downloadSuccessful = success
                 state.isDownloadingFile = false
+                state.downloadProgress = 1.0
                 return .none
 
             case .downloadButtonTapped:
@@ -143,8 +148,13 @@ struct DownloadDatabaseFilesView: View {
                     Spacer()
                     Text(viewStore.downloadMessage)
                     Spacer()
-                    ProgressView(value: min(max(viewStore.downloadProgress, 0), 1))
+                    let progress = min(max(viewStore.downloadProgress, 0.0), 1.0)
+                    ProgressView(value: progress)
                         .scaleEffect(x: 1, y: 2)
+                    let progressPercentage = Int(progress * 100)
+                    Text("\(progressPercentage)% Complete")
+                        .font(.headline)
+                        .padding(.top, 10)
                     Spacer()
                 } else if let downloadSuccessful = viewStore.downloadSuccessful {
                     Spacer()
@@ -183,11 +193,6 @@ struct DownloadDatabaseFilesView: View {
                     Button(viewStore.downloadButtonTitle) {
                         viewStore.send(.downloadButtonTapped)
                     }
-                    Spacer()
-                    Button("Delete Database") {
-                     _ = SQLiteFileManager.deleteDatabaseFile()
-                    }
-                    Spacer()
                 }
             }
             .padding()

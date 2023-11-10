@@ -31,19 +31,6 @@ struct SQLiteFileManager {
         }
     }
     
-    static func deleteDatabaseFile() -> Bool {
-        let databaseURL = localDatabaseURL
-        
-        do {
-            try FileManager.default.removeItem(at: databaseURL)
-            print("Database file deleted successfully")
-            return true
-        } catch {
-            print("Error deleting database file: \(error.localizedDescription)")
-            return false
-        }
-    }
-    
     static func checkDatabaseStatus() -> Bool {
         return FileManager.default.fileExists(atPath: localDatabaseURL.path)
     }

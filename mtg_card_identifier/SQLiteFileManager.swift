@@ -11,13 +11,16 @@ import SQLite
 struct SQLiteFileManager {
     private static let databaseURLString = "https://mtgjson.com/api/v5/AllPrintings.json"
     private static let localDatabaseURL = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first!.appendingPathComponent("AllPrintings.sqlite")
+    static var current: URLSessionDownloader?
     
     static func loadDatabaseFiles(progressHandler: @escaping (Double) -> Void, completion: @escaping (Bool) -> Void) -> Bool {
         guard let databaseURL = URL(string: databaseURLString) else {
             print("Invalid database URL")
             return false
         }
-        return URLSessionDownloader.start(sessionIdentifier: "SQLiteFileManager", url: databaseURL, progressRecieved: { progress in
+        self.current?.defaultExpectedFileSize = 380000000 // MTGJson doesn't provide the `Content-Length` header that allows us to get back the `totalBytesExpectedToWrite` value here (it will always be -1), so we're estimating the expeted download size of these files based on historical experience.
+
+        return (URLSessionDownloader.start(sessionIdentifier: "SQLiteFileManager", url: databaseURL, progressReceived: { progress in
             progressHandler(progress)
         }) { temporaryURL in
             do {
@@ -28,7 +31,7 @@ struct SQLiteFileManager {
                 print("Error moving downloaded file: \(error.localizedDescription)")
                 completion(false)
             }
-        }
+        } != nil)
     }
     
     static func checkDatabaseStatus() -> Bool {

@@ -8,11 +8,10 @@
 import SwiftUI
 import ComposableArchitecture
 
-
 class URLSessionDownloader: NSObject, URLSessionDownloadDelegate {
-    static var current: URLSessionDownloader?
     let sessionIdentifier: String
     var task: URLSessionDownloadTask?
+    var defaultExpectedFileSize: Double? = 380000000 //there are issues with download when this is nil
     private(set) lazy var session: URLSession = {
         URLSession(configuration: .background(withIdentifier: sessionIdentifier), delegate: self, delegateQueue: OperationQueue())
     }()
@@ -29,28 +28,36 @@ class URLSessionDownloader: NSObject, URLSessionDownloadDelegate {
         task?.resume()
     }
     
-    static func start(sessionIdentifier: String, url: URL, progressRecieved: @escaping (Double) -> Void, didFinishDownloading: @escaping (URL?) -> Void) -> Bool {
-        guard self.current == nil else { return false }
-        self.current = .init(sessionIdentifier: sessionIdentifier, url: url, progressRecieved: progressRecieved, didFinishDownloading: didFinishDownloading)
+    static func start(sessionIdentifier: String, url: URL, progressReceived: @escaping (Double) -> Void, didFinishDownloading: @escaping (URL?) -> Void) -> URLSessionDownloader? {
+        let downloader = URLSessionDownloader(sessionIdentifier: sessionIdentifier, url: url, progressRecieved: progressReceived, didFinishDownloading: didFinishDownloading)
 
         let request = URLRequest(url: url)
-        self.current?.task = URLSession.shared.downloadTask(with: request)
-        self.current?.task?.resume()
+        downloader.task = URLSession.shared.downloadTask(with: request)
+        downloader.task?.resume()
 
-        return true
+        return downloader
     }
     
     func urlSession(_ session: URLSession, downloadTask: URLSessionDownloadTask, didWriteData bytesWritten: Int64, totalBytesWritten: Int64, totalBytesExpectedToWrite: Int64) {
+        
+        let expectedFileSize: Double? = (totalBytesExpectedToWrite != NSURLSessionTransferSizeUnknown) ? Double(totalBytesExpectedToWrite) : defaultExpectedFileSize
+
+        guard let expectedFileSize else {
+            print("No known total file size. API should return `Content-Type` in its header.")
+            return
+        }
         let scaledDownFactor: Double = 100000000
-        let absoluteTotalBytesExpected = max(1.0, abs(Double(totalBytesExpectedToWrite) / scaledDownFactor))
-        let absoluteTotalBytesWritten = max(0.0, abs(Double(totalBytesWritten) / scaledDownFactor))
+        let absoluteTotalBytesExpected = expectedFileSize / scaledDownFactor
+        let absoluteTotalBytesWritten = max(0.0, Double(totalBytesWritten) / scaledDownFactor)
         let progress = min(1.0, absoluteTotalBytesWritten / absoluteTotalBytesExpected)
+        print("downloading expected: \(totalBytesExpectedToWrite)")
+        print("downloading written: \(absoluteTotalBytesWritten)")
+        print("downloading progress: \(progress)")
         progressRecieved(progress)
     }
     
     func urlSession(_ session: URLSession, downloadTask: URLSessionDownloadTask, didFinishDownloadingTo location: URL) {
         didFinishDownloading(location)
-        Self.current = nil
     }
     func urlSession(_ session: URLSession, task: URLSessionTask, didCompleteWithError error: Error?) {
         if let error = error {
@@ -59,7 +66,6 @@ class URLSessionDownloader: NSObject, URLSessionDownloadDelegate {
         } else {
             print("Download completed successfully.")
         }
-        Self.current = nil
     }
 }
 

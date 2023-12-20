@@ -14,31 +14,57 @@ extension CGRect {
         guard aspectRatio > 0 else {
             return CGRect.zero
         }
+///                width / height
+///                magic cards AspectRatio 2.5 / 3.5 = .714
+        ///                
+        let selfAspectRatio = self.width / self.height // aspect ratio of the phone
         
-        let height = Int(self.height * aspectRatio)
-        let width = Int(self.width * aspectRatio)
-        //    compare the aspectratio passed in agaist self for rect
-        
-        if self.height > self.width {
-            //            its protrait
-            return CGRect(x: (Int(self.width) - width) / 2, y: 0, width: width, height: height)
-        } else if self.width > self.height {
-            //            its landscape
-            return CGRect(x: (Int(self.width) - width) / 2, y: 0, width: width, height: height)
-        } else   {
-            //            its sqaure
-            return CGRect(x: (Int(self.width) - width) / 2, y: 0, width: width, height: height)
+        if selfAspectRatio > aspectRatio {
+            // self is wider than aspectRatio. That means the rect we return should be full height of self - you'll have padding on the right and left.
+            //  ___X_______
+            //  | padding |
+            //  Y   ___   |
+            //  |   |X|   |
+            //  |   |X|   |
+            //  |   |X|   |
+            //  |   |X|   |
+            //  |   ---   |
+            //  | padding |
+            //  -----------
+            let paddedHeight = self.height - padding * 2
+            
+            let returnWidth = paddedHeight * aspectRatio
+            let returnHeight = paddedHeight
+            let returnY = padding
+            let returnX = (self.width - returnWidth) / 2
+            return CGRect(x: returnX, y: returnY, width: returnWidth, height: returnHeight)
+            
+        } else if selfAspectRatio < aspectRatio {
+            // self is taller than aspectRatio. That means the rect we return should be full width of self.
+            //  _X_____
+            //  |     |
+            //  Y ___ |
+            //  |P|X|P|
+            //  | --- |
+            //  |     |
+            //  -------
+            let paddedWidth = self.width - padding * 2
+            
+            let returnWidth = paddedWidth
+            let returnHeight = paddedWidth / aspectRatio
+            let returnY = (self.height - returnHeight) / 2
+            let returnX = padding
+            return CGRect(x: returnX, y: returnY, width: returnWidth, height: returnHeight)
+            
+        } else {
+            // aspect ratios are the same
+            // shape will be the same, but padding*2 smaller
+            let returnX = padding
+            let returnY = padding
+            let returnWidth = self.width - padding * 2
+            let returnHeight = self.height - padding * 2
+            return CGRect(x: returnX, y: returnY, width: returnWidth, height: returnHeight)
         }
-        
-        
-        //        Use TDD
-        //        width / height
-        //        magic cards AspectRatio 2.5 / 3.5 = .714
-        
-        
-        
-        // TODO: create Unit tests for this function that test it on different sizes/orientations.
-        //        return CGRect(x: (Int(self.width) - width) / 2, y: 0, width: width, height: Int(self.height))
     }
 }
 
@@ -77,18 +103,24 @@ class PartialTransparentView: UIView {
 struct LiveTextScanningViewWrapper: View {
     var body: some View {
         GeometryReader { geometry in
-            // TODO: actually fill this out, the below code is an example of the concept.
+            
             let screenSize = geometry.frame(in: .global)
-            let cardRect = screenSize.largestCenteredRect(with: 2, padding: 15)
+            let cardRect = screenSize.largestCenteredRect(with: 0.714, padding: 15)
             
             let originX = (screenSize.width - cardRect.width) / 2
             let originY = (screenSize.height - cardRect.height) / 2
             let regionOfInterest = CGRect(x: originX, y: originY, width: cardRect.width, height: cardRect.height)
-            
-            // calculate the biggest dimensions of a card that you could fit in the frame.size
-            // create an overlay view that fills in the extra space around the sides of that size
-            // create a region of interest with that size, figuring out what the `origin` of it needs to be so it's "centered"
-            LiveTextScannerView(scannedText: .constant([]), overlay: Color.blue.padding(.all, 50), regionOfInterest: screenSize)
+
+           let overlay = Rectangle()
+                .fill(Color.black.opacity(0.3))
+                .blendMode(.destinationOut)
+                .frame(width: geometry.size.width, height: geometry.size.height)
+                .mask(Rectangle()
+                    .frame(width: regionOfInterest.width, height: regionOfInterest.height)
+                    .offset(x: regionOfInterest.origin.x, y: regionOfInterest.origin.y)
+                )
+    
+            LiveTextScannerView(scannedText: .constant([]), overlay: overlay, regionOfInterest: regionOfInterest)
         }
     }
 }

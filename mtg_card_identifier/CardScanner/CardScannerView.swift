@@ -6,13 +6,12 @@
 //
 
 import SwiftUI
-//VisionKit only in live text scanner.
 struct CardScannerView: View {
-//    @State var scannedText: [String] = []
+    @State var scannedText: [String] = []
     var body: some View {
 
         NavigationView {
-            LiveTextScanningViewWrapper()
+            LiveTextScannerView(scannedText: $scannedText, overlay: , regionOfInterest: <#T##CGRect?#>)
         }
     }
 }

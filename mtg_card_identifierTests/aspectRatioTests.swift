@@ -11,7 +11,7 @@ import XCTest
 final class aspectRatioTests: XCTestCase {
     /// width / height
     /// magic cards AspectRatio 2.5 / 3.5 = .714
-    let cardAspectRatio = 0.714
+    let cardAspectRatio = 0.714285714285714
     //    func testWideRectangleAndTallAspectRatioWithZeroPadding() throws {
     //        var cgRect = CGRect(x: 0, y: 0, width: 500, height: 300)
     //
@@ -189,7 +189,15 @@ final class aspectRatioTests: XCTestCase {
     
     
     func testSameAspectRatio() {
+        let sameAspectRatio = CGRect(x: 0, y: 0, width: 2.5, height: 3.5)
+        let padding: CGFloat = 1
+        let width: CGFloat = 2.5
+        let height: CGFloat = 3.5
         
+        let returnWidth = width - padding * 2
+        let returnHeight = height - padding * 2
+        
+        XCTAssertEqual(sameAspectRatio.largestCenteredRect(with: cardAspectRatio, padding: padding), CGRect(x: padding, y: padding, width: returnWidth, height: returnHeight))
     }
     
     

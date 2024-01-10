@@ -16,7 +16,7 @@ extension CGRect {
         }
 ///                width / height
 ///                magic cards AspectRatio 2.5 / 3.5 = .714
-        ///                
+        ///
         let selfAspectRatio = self.width / self.height // aspect ratio of the phone
         
         if selfAspectRatio > aspectRatio {
@@ -99,6 +99,7 @@ class PartialTransparentView: UIView {
         path.fill()
     }
 }
+// I Don't think this is it. I need to mainly set up a rectangle the same size as the cardRect and than gray out everything else around the cardRect. The regionOfIntreset should follow the CardRect. Maybe look at the cgrect func above for notes
 
 struct LiveTextScanningViewWrapper: View {
     var body: some View {

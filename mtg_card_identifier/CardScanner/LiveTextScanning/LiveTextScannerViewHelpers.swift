@@ -11,12 +11,21 @@ import SwiftUI
 struct NoCameraAccessView: View {
     var body: some View {
         VStack {
+            Spacer()
+            
+            
+            
             Text("No permissions enabled.                                                  You must enable camera access in order to scan cards")
                 .multilineTextAlignment(.center)
             
             Button(action: UIApplication.shared.openAppSettings) {
                 Text("Open Settings")
+                
+                
             }
+            
+            Spacer()
+            Spacer()
         }
     }
  }

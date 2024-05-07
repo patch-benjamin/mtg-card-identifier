@@ -13,6 +13,7 @@ import AVFoundation
 struct LiveTextScannerView<Overlay: View>: View {
     var scanedText: Binding<[String]>
     let overlay: Overlay?
+//    Dont know if that "overlay" should stay that way.
     let regionOfInterest: CGRect?
     
     @State private var authorizationStatus: AVAuthorizationStatus
@@ -41,8 +42,6 @@ struct LiveTextScannerView<Overlay: View>: View {
             NoCameraAccessView()
         case .authorized:
             ZStack {
-                
-                
                 LiveTextScanner(scanedText: scanedText, regionOfInterest: regionOfInterest)
 //                Putting the overlay here worked, idk if its how it should be but it does work quite well haha.
                 overlay
@@ -74,34 +73,6 @@ struct LiveTextScannerView<Overlay: View>: View {
     
 }
 
-//class GlobalOverlayView: UIView {
-//    let screenSize: CGSize
-//    let regionOfInterest: CGRect
-//    
-//    init(screenSize: CGSize, regionOfInterest: CGRect) {
-//        self.screenSize = screenSize
-//        self.regionOfInterest = regionOfInterest
-//        super.init(frame: .zero)
-//        setup()
-//    }
-//    
-//    required init?(coder: NSCoder) {
-//        fatalError("init(coder:) has not been implemented")
-//    }
-//    
-//    private func setup() {
-//        let background = UIView(frame: CGRect(x: 0, y: 0, width: screenSize.width, height: screenSize.height))
-//        background.backgroundColor = UIColor.black.withAlphaComponent(0.5)
-//        addSubview(background)
-//        
-//        let cardCutout = UIView(frame: CGRect(x: regionOfInterest.origin.x, y: regionOfInterest.origin.y, width: regionOfInterest.width, height: regionOfInterest.height))
-//        cardCutout.layer.cornerRadius = regionOfInterest.height / 10
-//        cardCutout.backgroundColor = .clear
-//        addSubview(cardCutout)
-//    }
-//}
-//Gives the black cutout but nothing on the back so its basically useless maybe....
-
 private struct LiveTextScanner: UIViewControllerRepresentable {
     var scanedText: Binding<[String]>
     let regionOfInterest: CGRect?
@@ -118,9 +89,7 @@ private struct LiveTextScanner: UIViewControllerRepresentable {
             isHighFrameRateTrackingEnabled: true,
             isHighlightingEnabled: showTextBoundingRect
         )
-//        let overlayView = GlobalOverlayView(screenSize: UIScreen.main.bounds.size, regionOfInterest: regionOfInterest!)
-//            vc.view.addSubview(overlayView)
-//            I'm thinking if I can add a subview here of the overlay in cardscanner because it needs to be over this vc not under, which it looks like it is in cardScannerView since the overlay doesnt show up but it looks like its under the LiveTextScannerView I call.
+
         vc.regionOfInterest = regionOfInterest
         vc.delegate = context.coordinator
         try? vc.startScanning()

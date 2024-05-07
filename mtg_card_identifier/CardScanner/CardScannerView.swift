@@ -11,15 +11,12 @@ struct CardScannerView: View {
     @State var scannedText: [String] = []
     var body: some View {
 
-        NavigationView {
+        NavigationStack {
             GeometryReader { geometry in
                 
                 let screenSize = geometry.frame(in: .global)
-                let cardRect = screenSize.largestCenteredRect(with: Self.magicCardAspectRatio, padding: 10)
+                let cardRect = screenSize.largestCenteredRect(with: Self.magicCardAspectRatio, padding: 20)
                 let regionOfInterest = cardRect
-    //            let originX = (screenSize.width - cardRect.width) / 2
-    //            let originY = (screenSize.height - cardRect.height) / 2m
-               
 
                 let background =  Rectangle()
                     .fill(Color.black.opacity(0.5))
@@ -27,6 +24,7 @@ struct CardScannerView: View {
                 let cardCutout = RoundedRectangle(cornerRadius: regionOfInterest.size.height / 10)
                     .fill(.black)
                     .frame(width: regionOfInterest.width, height: regionOfInterest.height)
+                
                 let overlay = ZStack {
                     background
                     cardCutout

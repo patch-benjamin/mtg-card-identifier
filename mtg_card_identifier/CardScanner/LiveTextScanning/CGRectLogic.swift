@@ -66,33 +66,3 @@ extension CGRect {
         }
     }
 }
-
-//class PartialTransparentView: UIView {
-//    var cutout: CGRect?
-//    
-//    init(cutout: CGRect?) {
-//        super.init(frame: .zero)
-//        self.cutout = cutout
-//        backgroundColor = UIColor.black.withAlphaComponent(0.6)
-//        isOpaque = false
-//    }
-//    
-//    required init?(coder: NSCoder) {
-//        fatalError("init(coder:) has not been implemented")
-//    }
-//    
-//    override func draw(_ rect: CGRect) {
-//        backgroundColor?.setFill()
-//        UIRectFill(rect)
-//        guard let cutout = cutout else { return }
-//        
-//        
-//        let path = UIBezierPath(roundedRect: cutout, cornerRadius: 10)
-//        let intersection = rect.intersection(cutout)
-//        UIRectFill(intersection)
-//        
-//        UIColor.clear.setFill()
-//        UIGraphicsGetCurrentContext()?.setBlendMode(.copy)
-//        path.fill()
-//    }
-//}

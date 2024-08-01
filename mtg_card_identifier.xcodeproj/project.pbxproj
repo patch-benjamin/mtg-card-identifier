@@ -23,6 +23,7 @@
 		717449302A2A2DD6001FB3E4 /* aspectRatioTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7174492F2A2A2DD6001FB3E4 /* aspectRatioTests.swift */; };
 		7174493A2A2A2DD6001FB3E4 /* mtg_card_identifierUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 717449392A2A2DD6001FB3E4 /* mtg_card_identifierUITests.swift */; };
 		7174493C2A2A2DD6001FB3E4 /* mtg_card_identifierUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7174493B2A2A2DD6001FB3E4 /* mtg_card_identifierUITestsLaunchTests.swift */; };
+		71FD6D9C2C5BDFF40099CAE5 /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71FD6D9B2C5BDFF40099CAE5 /* LoginView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -48,13 +49,10 @@
 		048A7F562A8D652F00B4C4AF /* CardScannerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardScannerView.swift; sourceTree = "<group>"; };
 		048A7F582A8D67A500B4C4AF /* LiveTextScannerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LiveTextScannerView.swift; sourceTree = "<group>"; };
 		048A7F5A2A8D781600B4C4AF /* mtg-card-identifier-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = "mtg-card-identifier-Info.plist"; sourceTree = SOURCE_ROOT; };
+		04C8FD8B2BD219FC00740CA0 /* mtg-card-identifierTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = "mtg-card-identifierTests-Info.plist"; sourceTree = SOURCE_ROOT; };
 		4A1E848E2A7DF8CA00A8EAE0 /* SQLiteFileManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SQLiteFileManager.swift; sourceTree = "<group>"; };
 		4A1E84972A87050F00A8EAE0 /* RootView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RootView.swift; sourceTree = "<group>"; };
-
 		4A393C3F2AB0DE6F007F3B18 /* DownloadDatabaseFilesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DownloadDatabaseFilesView.swift; sourceTree = "<group>"; };
-
-		04C8FD8B2BD219FC00740CA0 /* mtg-card-identifierTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = "mtg-card-identifierTests-Info.plist"; sourceTree = SOURCE_ROOT; };
-
 		7174491B2A2A2DD5001FB3E4 /* mtg_card_identifier.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = mtg_card_identifier.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		7174491E2A2A2DD5001FB3E4 /* mtg_card_identifierApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = mtg_card_identifierApp.swift; sourceTree = "<group>"; };
 		717449202A2A2DD5001FB3E4 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -65,6 +63,7 @@
 		717449352A2A2DD6001FB3E4 /* mtg_card_identifierUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = mtg_card_identifierUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		717449392A2A2DD6001FB3E4 /* mtg_card_identifierUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = mtg_card_identifierUITests.swift; sourceTree = "<group>"; };
 		7174493B2A2A2DD6001FB3E4 /* mtg_card_identifierUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = mtg_card_identifierUITestsLaunchTests.swift; sourceTree = "<group>"; };
+		71FD6D9B2C5BDFF40099CAE5 /* LoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -139,6 +138,7 @@
 				048A7F5A2A8D781600B4C4AF /* mtg-card-identifier-Info.plist */,
 				7174491E2A2A2DD5001FB3E4 /* mtg_card_identifierApp.swift */,
 				4A1E84972A87050F00A8EAE0 /* RootView.swift */,
+				71FD6D9B2C5BDFF40099CAE5 /* LoginView.swift */,
 				4A1E848E2A7DF8CA00A8EAE0 /* SQLiteFileManager.swift */,
 				4A393C3F2AB0DE6F007F3B18 /* DownloadDatabaseFilesView.swift */,
 				717449202A2A2DD5001FB3E4 /* ContentView.swift */,
@@ -321,6 +321,7 @@
 				7174491F2A2A2DD5001FB3E4 /* mtg_card_identifierApp.swift in Sources */,
 				4A1E848F2A7DF8CA00A8EAE0 /* SQLiteFileManager.swift in Sources */,
 				4A1E84982A87051000A8EAE0 /* RootView.swift in Sources */,
+				71FD6D9C2C5BDFF40099CAE5 /* LoginView.swift in Sources */,
 				4A393C402AB0DE6F007F3B18 /* DownloadDatabaseFilesView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

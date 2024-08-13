@@ -2,3 +2,4 @@
 *.xcuserstate
 mtg_card_identifier.xcodeproj/xcuserdata/*
 .DS_Store
+/mtg_card_identifier.xcodeproj/xcuserdata/benjaminpatch.xcuserdatad/xcschemes/xcschememanagement.plist

@@ -11,8 +11,17 @@ import SwiftUI
 struct mtg_card_identifierApp: App {
     var body: some Scene {
         WindowGroup {
-//            RootView(store: RootView_Previews.store)
-            DownloadDatabaseFilesView(store: DownloadDatabaseFilesView_Previews.store)
+            OpeningView()
         }
     }
+}
+
+struct OpeningView: View {
+    var body: some View {
+        /*@START_MENU_TOKEN@*//*@PLACEHOLDER=Hello, world!@*/Text("Hello, world!")/*@END_MENU_TOKEN@*/
+    }
+}
+
+#Preview {
+    OpeningView()
 }
